@@ -1,0 +1,18 @@
+# device information for lan gateway
+# zigstar/lan_gateway.yaml
+#Ethernet connection information
+ethernet:
+  type: LAN8720
+  mdc_pin: GPIO23
+  mdio_pin: GPIO18
+  clk_mode: GPIO0_IN
+  phy_addr: 1
+  power_pin: GPIO16
+  
+substitutions:
+  project_name: "Zigstar.Lan Gateway"
+  project_version: "v2.2"
+  rx_pin: GPIO5
+  tx_pin: GPIO17
+  zRST_gpio: GPIO33
+  zbsl_gpio: GPIO32

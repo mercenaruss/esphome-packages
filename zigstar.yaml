@@ -1,0 +1,14 @@
+# Substitutions
+substitutions:
+  name: "uzg-01"
+  friendly_name: "UZG-01"
+  api_key: !secret api_key
+  ota_password: !secret ota_password
+
+packages:
+  common: !include hardware/zigstar-gw/common.yaml
+  device: !include hardware/zigstar-gw/uzg-01.yaml
+  #Enable BT Proxy https://esphome.github.io/bluetooth-proxies/
+  bt_proxy: !include hardware/esp32/ble-proxy-active.yaml
+  #Enable ZigBee functionality
+  zigbee: !include hardware/zigstar-gw/zigbee.yaml

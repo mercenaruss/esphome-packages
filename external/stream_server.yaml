@@ -1,0 +1,3 @@
+#External component Stream Server
+external_components:
+    - source: github://oxan/esphome-stream-server

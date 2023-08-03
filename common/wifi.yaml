@@ -1,0 +1,28 @@
+# WiFi information
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: IP
+      icon: mdi:ip-network
+    mac_address:
+      name: MAC
+      icon: mdi:ip-network
+    ssid:
+      name: SSID
+      icon: mdi:wifi
+# WiFi Signal Sensor
+sensor:
+  - platform: wifi_signal
+    name: RSSI
+    update_interval: 60s
+
+# EN:  Enables Wi-Fi default access point in fallback mode.
+# URL: https://esphome.io/components/wifi.html
+wifi:
+  domain: ${domain}
+  ap:
+    password: ${ap_password}
+
+# EN:  Enables captive portal in fallback mode.
+# URL: https://esphome.io/components/ota.html
+captive_portal:

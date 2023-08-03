@@ -1,0 +1,11 @@
+rtttl:
+  output: buzzer_output
+
+api:
+  services:
+    - service: play_rtttl
+      variables:
+        song: string
+      then:
+        - rtttl.play:
+            rtttl: !lambda 'return song;'

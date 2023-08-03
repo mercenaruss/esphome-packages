@@ -1,0 +1,5 @@
+# EN:  Restart button
+# URL: https://esphome.io/components/button/restart.html
+button:
+  - platform: restart
+    name: Restart

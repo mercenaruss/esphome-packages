@@ -1,0 +1,62 @@
+# EN:  Including additional packages.
+packages:
+    # Stream server
+    stream : !include ../../external/stream_server.yaml
+
+# Device functions:
+switch:
+    - platform: gpio
+      pin: ${zRST_gpio}
+      id: zRST_gpio
+      inverted: yes
+      restore_mode: ALWAYS_OFF
+    - platform: template
+      name: "Zigbee RST"
+      icon: mdi:toggle-switch
+      id: zRST
+      turn_on_action:
+        - switch.turn_on: zRST_gpio
+        - delay: 15ms
+        - switch.turn_off: zRST_gpio
+    - platform: gpio
+      pin: ${zbsl_gpio}
+      name: "Zigbee BSL"
+      icon: mdi:toggle-switch
+      id: zBSL
+      inverted: yes
+      restore_mode: ALWAYS_OFF
+      internal: true
+    - platform: template
+      name: "Firmware Update"
+      icon: mdi:cellphone-arrow-down
+      turn_on_action:
+        - script.execute: fw_update_mode
+      turn_off_action:
+        - switch.toggle: zRST
+  
+#Update CC2652 Firmware
+script:
+  - id: fw_update_mode
+    then:
+      - switch.turn_on: zBSL
+      - delay: 1s
+      - switch.turn_on: zRST_gpio
+      - delay: 1s
+      - switch.turn_off: zRST_gpio
+      - logger.log: "Delaying ~5 seconds for TI chip to be ready"
+      - delay: 5s
+      - switch.turn_off: zBSL
+      - logger.log: "Update with cc2538-bsl tool now!"
+      - logger.log: "Usage: cc2538-bsl.py -p socket://ip_or_hostname:6638 -evw firmware.hex"
+
+#UART Settings
+uart:
+  id: uart_bus
+  rx_pin: ${rx_pin}
+  tx_pin: ${tx_pin}
+  baud_rate: 115200
+
+#Serial Bridge Settings,change default 6638 TCP port
+stream_server:
+  uart_id: uart_bus
+  port: 6638

@@ -1,0 +1,4 @@
+# EN:  Enables HTTP web server.
+# URL: https://esphome.io/components/web_server.html
+web_server:
+  port: 80

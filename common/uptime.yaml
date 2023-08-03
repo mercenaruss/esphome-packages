@@ -1,0 +1,34 @@
+# Example configuration entry
+text_sensor:
+  - platform: template
+    name: Uptime
+    id: uptime_txt
+    entity_category: diagnostic
+    icon: mdi:clock-start
+sensor:
+  - platform: uptime
+    id: uptime_seconds
+    update_interval: 60s
+    on_raw_value:
+      then:
+        - text_sensor.template.publish:
+            id: uptime_txt
+            state: !lambda |-
+              std::string result;
+              unsigned seconds = static_cast<unsigned>(x);
+              unsigned days = seconds / (24 * 3600);
+              seconds = seconds % (24 * 3600);
+              if (days != 0) {
+                result += to_string(days);
+                result += "d ";
+              }
+              unsigned hours = seconds / 3600;
+              seconds = seconds % 3600;
+              if (hours != 0) {
+                result += to_string(hours);
+                result += "h ";
+              }
+              unsigned minutes = seconds / 60;
+              result += to_string(minutes);
+              result += 'm';
+              return result;

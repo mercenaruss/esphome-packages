@@ -1,0 +1,9 @@
+# EN:  Including additional packages.
+packages:
+  # Default common config
+  default: !include ../../common/default.yaml
+  # HTTP server config
+  web: !include ../../common/web.yaml
+  # Default ESP32 settings
+  esp32: !include ../esp32/esp32.yaml
+

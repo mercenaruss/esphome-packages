@@ -1,0 +1,25 @@
+# EN:  Package substitutions variables.
+# URL: https://esphome.io/guides/configuration-types.html
+substitutions:
+  name: esphome-device
+  friendly_name: ESPHome Device
+  domain: ".local"
+  ap_password: "12345678"
+  ota_password: ""
+
+# EN:  Minimal ESPHOME config.
+# URL: https://esphome.io/components/esphome.html
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  platformio_options:
+    upload_speed: 2000000
+
+# EN:  Enables logger.
+# URL: https://esphome.io/components/logger.html
+logger:
+
+# EN:  Enables OTA
+# URL: https://esphome.io/components/ota.html
+ota:
+  password: ${ota_password}
